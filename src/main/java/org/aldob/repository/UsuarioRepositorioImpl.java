@@ -8,7 +8,7 @@ import java.util.List;
 
 public class UsuarioRepositorioImpl implements Repository<Usuario>{
 
-    private Connection getConnection() throws SQLException{
+    private Connection getConnection(){
         return ConexionDB.getConexion();
     }
 
@@ -27,7 +27,7 @@ public class UsuarioRepositorioImpl implements Repository<Usuario>{
                 ));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException(e.getMessage());
         }
         return usuarios;
     }
@@ -48,7 +48,7 @@ public class UsuarioRepositorioImpl implements Repository<Usuario>{
             }
             rs.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException(e.getMessage());
         }
         return usuario;
     }
@@ -70,7 +70,7 @@ public class UsuarioRepositorioImpl implements Repository<Usuario>{
                     usuario.setId(generatedKeys.getLong(1));
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                throw new IllegalArgumentException(e.getMessage());
             }
         } else {
             // Usuario existente, realizar actualización
@@ -82,12 +82,11 @@ public class UsuarioRepositorioImpl implements Repository<Usuario>{
                 stmt.setLong(4, usuario.getId());
                 stmt.executeUpdate();
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                throw new IllegalArgumentException(e.getMessage());
             }
         }
 
     }
-
 
     @Override
     public void delete(Long id) {
@@ -96,7 +95,7 @@ public class UsuarioRepositorioImpl implements Repository<Usuario>{
             stmt.setLong(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 }

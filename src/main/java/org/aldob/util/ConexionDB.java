@@ -4,20 +4,22 @@ import java.sql.Connection;
 
 public class ConexionDB {
 
-    private static String url= "jdbc:mysql://localhost:3306/projectomantenedorusuariosjdbc";
-    private static String username = "root";
-    private static String password = "root";
-    private static Connection conn;
+    private static final String URL= "jdbc:mysql://localhost:3306/projectomantenedorusuariosjdbc";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "root";
+
+
+    private ConexionDB() {
+            throw new IllegalStateException("Utility class");
+    }
 
     public static Connection getConexion(){
+        Connection conn;
         try{
-            if(conn == null){
-                conn = java.sql.DriverManager.getConnection(url, username, password);
-            }
+            conn = java.sql.DriverManager.getConnection(URL, USERNAME, PASSWORD);
         }catch (java.sql.SQLException e){
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException(e.getMessage());
         }
         return conn;
     }
-
 }

@@ -4,15 +4,15 @@ import org.aldob.models.Usuario;
 import org.aldob.repository.Repository;
 import org.aldob.repository.UsuarioRepositorioImpl;
 import org.aldob.util.ConexionDB;
-
 import javax.swing.*;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class MainDB {
     public static void main(String[] args) {
-        int opcionIndice = 0;
+        int opcionIndice;
 
         Map<String, Integer> operaciones = new HashMap<>();
         operaciones.put("Actualizar", 1);
@@ -69,7 +69,6 @@ public class MainDB {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al conectar a la base de datos" + e.getMessage());
         }
     }
